@@ -3,7 +3,7 @@
 // components/Navbar.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from './Media/logo.png';
+// import logo from './Media/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 
@@ -32,17 +32,29 @@ export default function Navbar() {
 
     // Optional: Close when clicking outside the offcanvas
     document.addEventListener("click", (event) => {
-      if (!offcanvas.contains(event.target) && event.target !== toggleButton) {
-        console.log("Closing offcanvas because clicked outside..."); // Debugging log
+      const target = event.target;
+      if (target instanceof Node && !offcanvas.contains(target) && target !== toggleButton) {
+        console.log("Closing offcanvas because clicked outside...");
         offcanvas.classList.remove("open");
       }
-    });
+    });    
   }, []);
   return (
     <div className="navigation">
       <div className="container nav-container">
         <div className="col-md-6">
-          <Image className="logo" src={logo} alt="company logo"/>
+          {/* <img className="logo" src='/images/logo.png' alt="company logo"/> */}
+
+          <div className="logo-container">
+            <div className="logo-left">
+              <span className="logo-title focus-in-expand">Chris Wooodby</span>
+              <span className="logo-secondary">Web Design</span>
+            </div>
+            <div className="logo-right">
+              <span className="logo-icon bounce-in-top"></span>
+            </div>
+          </div>
+
         </div>
         <div className="col-md-6 nav-links">
         <div className="mobile-nav">

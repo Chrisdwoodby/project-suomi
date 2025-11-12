@@ -4,7 +4,7 @@ import Navbar from '@/app/navbar';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import Image from 'next/image';
-import screens from './Media/screens.png';
+// import screens from '../../Media/screens.png';
 import { ElfsightWidget } from 'next-elfsight-widget';
 
 export default function Home() {
@@ -63,7 +63,7 @@ export default function Home() {
                       <a className="company-cta">Get Started</a>
                   </div>
                   <div className="col-md-6" >
-                  <Image className="home-banner-image" src={screens} alt="A description of the image"/>
+                  <img className="home-banner-image" src='/images/screens.png' alt="A description of the image"/>
                   </div>
               </div>
             </div>
@@ -124,9 +124,7 @@ export default function Home() {
                     <div className="about-content">
                       <h3>About Me</h3>
                       <article>
-                        here is some filler text that will be replaced later. here is some filler text that will be replaced later. 
-                        here is some filler text that will be replaced later. here is some filler text that will be replaced later. 
-                        here is some filler text that will be replaced later. here is some filler text that will be replaced later. 
+                      Born and raised in Austin, Texas and beginning my career at SaaS oriented startups. I was quick to find my calling in helping companies grow into their ideal visions for themselves through innovative design, a thorough and comprehensive understanding of their clients, and proven digital marketing strategies. All while staying true to their brand identity. 
                       </article>
                     </div>
                   </div>

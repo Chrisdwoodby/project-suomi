@@ -328,14 +328,51 @@ article {
 .piller-group {
   display: flex;
 }
-.piller-image {
+.piller-wide, .piller-2, .piller-3 {
   height: 300px;
   width: 100px;
   margin-right: 50px;
   background: #000;
+  display: block;
   transition: 
     transform 730ms ease-in-out,
-    margin-right 1.5s ease-in-out;
+    margin-right 1.5s ease-in-out,
+    width 3s ease-in-out,
+    opacity 2s ease-in-out,
+}
+.piller-wide {
+  background:linear-gradient(90deg, rgba(10, 33, 191, 0.5) 47%, rgba(10, 33, 191, 0.5) 99%), url('/images/car.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.piller-2 {
+  background:linear-gradient(90deg, rgba(10, 33, 191, 0.5) 47%, rgba(10, 33, 191, 0.5) 99%), url('/images/bmx.png');
+  background-size: cover;
+  background-position: center;
+}
+.acomplishments-not-in-view .piller-wide {
+  transition: 
+    width .4s ease-in-out,
+    transform 730ms ease-in-out;
+}
+.acomplishments-not-in-view .piller-2, .acomplishments-not-in-view .piller-3 {
+  transition: 
+    width 1ms ease-in-out,
+    transform 730ms ease-in-out;
+}
+.acomplishments-in-view .piller-wide {
+  background: url('/images/who-ive-helped.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+.acomplishments-in-view .piller-2, .acomplishments-in-view .piller-3 {
+  transition: 
+    width 1.5s ease-in-out,
+    transform 730ms ease-in-out;
+}
+.acomplishments-in-view .piller-2, .acomplishments-in-view .piller-3 {
+  width: 0px;
 }
 .slide-in-right-line-1 {
 -webkit-animation: slide-in-right-line-1 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -560,15 +597,52 @@ article {
 .acomplishments {
   min-height: 500px;
   padding: 50px 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
-.acomplishments-in-view .piller-image {
+.acomplishments-heading {
+  position: relative;
+  z-index: 99;
+  opacity: 0;
+  font-size: 40px;
+  color: #fff;
+  transition: 
+    opacity 2s ease-in-out;
+}
+.animated .acomplishments-heading {
+  transition-delay: 2s;
+  opacity: 1;
+}
+
+.acomplishments-in-view .piller-wide {
   transform: translateY(450px);
   margin-right: 0px;
 }
-.acomplishments-not-in-view .piller-image {
+.acomplishments-not-in-view .piller-wide {
   transform: translateY(40px);
   margin-right: 50px;
 }
+.acomplishments-in-view .piller-2 {
+  transform: translateY(450px);
+  transition-delay: 150ms;
+  margin-right: 0px;
+}
+.acomplishments-not-in-view .piller-2 {
+  transform: translateY(40px);
+  margin-right: 50px;
+}
+.acomplishments-in-view .piller-3 {
+  transform: translateY(450px);
+  transition-delay: 250ms;
+  margin-right: 0px;
+}
+.acomplishments-not-in-view .piller-3 {
+  transform: translateY(40px);
+  margin-right: 50px;
+}
+
 .cta-section {
   background-color: #0A21BF;
 }

@@ -56,14 +56,11 @@ export default function Page() {
             <div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <span>787 Collective</span>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <span>Gather Austin</span>
-                        </div>
-                        <div className="col-md-4">
-                            <span>Austin Seminary</span>
                         </div>
                     </div>
                 </div>

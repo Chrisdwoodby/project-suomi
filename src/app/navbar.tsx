@@ -76,6 +76,7 @@ export default function Navbar() {
 
         <nav className="desktop-nav">
           <Link href="/">Home</Link>
+          <Link href="/services">services</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
           <a className="company-cta">Get Started</a>

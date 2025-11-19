@@ -434,14 +434,17 @@ article {
 }
 .searchbar {
   text-align: left;
-  background: #bdbdbd;
+  background: #eeee;
+  border: 3px solid #0A21BF;
   border-radius: 30px;
   display: flex;
   position: relative;
+  margin-top: -75px;
 }
 .searchbar span {
   opacity: 0.7;
-  padding: 5px 50px 5px 20px;
+  padding: 5px 60px 5px 20px;
+  font-size: 35px;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid black;
@@ -454,7 +457,7 @@ article {
 /* Typing animation */
 @keyframes typing {
 from { width: 0; }
-to   { width: 80%; }
+to   { width: 89%; }
 }
 
 /* Blinking cursor */
@@ -463,11 +466,11 @@ from, to { border-color: transparent; }
 50%      { border-color: black; }
 }
 .searchbar img {
-  height: 15px;
+  height: 30px;
   float: right;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 15px;
+  top: 15px;
 }
 .pulsate-bck {
 	-webkit-animation: pulsate-bck 0.5s ease-in-out both;
@@ -566,6 +569,14 @@ from, to { border-color: transparent; }
             transform: translateY(0);
     opacity: 1;
   }
+}
+.text-fade {
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.text-hidden {
+  opacity: 0;
 }
 
 .service-header {

@@ -54,12 +54,16 @@ article {
   display: flex;
   justify-content: end;
 }
-.navigation nav a {
+.desktop-nav a {
   margin: 0px 20px;
   display: flex;
   align-items: center;
+  color: #000;
+  text-decoration: none;
 }
-
+.navigation .company-cta {
+  color: #fff;
+}
 .logo-container {
   display: flex;
 }
@@ -435,7 +439,7 @@ article {
 .searchbar {
   text-align: left;
   background: #eeee;
-  border: 3px solid #0A21BF;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 30px;
   display: flex;
   position: relative;
@@ -447,9 +451,9 @@ article {
   font-size: 35px;
   white-space: nowrap;
   overflow: hidden;
+  color: #000;
   border-right: 3px solid black;
   display: inline-block; /* REQUIRED for width animation */
-
   animation: typing 2s steps(26, end) forwards,
              blink-caret 0.7s step-end infinite;
 }
@@ -535,11 +539,16 @@ from, to { border-color: transparent; }
 }
 
 .services-hero {
-  height: 500px;
+  min-height: 400px;
   display: flex;
+  padding: 50px 0;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background: #F1F1FB;
+}
+.services-hero h3 {
+  margin-bottom: 20px;
 }
 .fade-in-bottom {
 	-webkit-animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
@@ -592,6 +601,37 @@ from, to { border-color: transparent; }
 .services-description {
   margin-top: 15px;
 }
+.service-page-title-bg-line {
+  width: 3px;
+  height: 60px;
+  margin: 2px;
+  background: #000;
+  display: block;
+  transition: 
+  margin-top 200ms ease-in-out,
+  margin-bottom 200ms ease-in-out;
+}
+.service-page-title {
+  position: absolute;
+  background: #fff;
+  padding: 0px 5px;
+}
+.service-page-title h4 {
+  margin-bottom: 0;
+}
+.service-list {
+  padding: 50px 0;
+}
+.service-details {
+  padding: 50px 0;
+}
+.service-list .col-md-3 {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
 .services-lines-container {
   display: flex;
   justify-content: start;
@@ -604,13 +644,8 @@ from, to { border-color: transparent; }
   height: 4px;
   margin: 5px 0px;
 }
+
 .services-details {
-  /* border-top: 20px solid #fff;
-  border-left: 20px solid #fff;
-  border-bottom: 20px solid #fff;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  padding: 30px; */
   padding: 30px 30px;
   display: flex;
   flex-direction: column;
@@ -618,6 +653,22 @@ from, to { border-color: transparent; }
   outline: 20px solid #fff;
   background: #F1F1FB;
   color: #000;
+}
+.service-row-bottom {
+  display: none;
+  opacity: 0;
+  transition: 
+  display 200ms ease-in-out,
+  opacity 200ms ease-in-out;
+}
+.expanded .service-row-bottom {
+  display: block;
+  opacity: 1;
+}
+.service-row-top {
+  background: #F1F1FB;
+  padding: 10px 15px;
+  border-radius: 30px;
 }
 .services-container .col-md-4 {
   display: flex;

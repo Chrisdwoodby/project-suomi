@@ -654,21 +654,24 @@ from, to { border-color: transparent; }
   background: #F1F1FB;
   color: #000;
 }
+.service-details .container {
+  padding: 50px 0;
+}
+.service-dropdown {
+  border-radius: 15px;
+}
 .service-row-bottom {
-  display: none;
-  opacity: 0;
-  transition: 
-  display 200ms ease-in-out,
-  opacity 200ms ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+  background: #ededed;
+  transition: max-height 300ms ease-in-out;
 }
 .expanded .service-row-bottom {
-  display: block;
-  opacity: 1;
+  max-height: 500px;
 }
 .service-row-top {
   background: #F1F1FB;
   padding: 10px 15px;
-  border-radius: 30px;
 }
 .services-container .col-md-4 {
   display: flex;

@@ -31,10 +31,10 @@ export default function Page() {
           const animate = () => {
             if (!animating) return;
     
-            const time = Date.now() / 300; // slower wave
+            const time = Date.now() / 300;
     
             lines.forEach((line, index) => {
-              const amplitude = 10; // <-- increase for bigger movement
+              const amplitude = 25;
               const offset = Math.sin(time + index * 0.6) * amplitude;
     
               line.style.marginTop = `${30 + offset}px`;
@@ -49,9 +49,26 @@ export default function Page() {
     
         container.addEventListener("mouseleave", () => {
           animating = false;
+    
+          const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
+    
+          // Smooth reset
+          lines.forEach((line) => {
+            line.style.transition = "margin 0.4s ease-out";
+            line.style.marginTop = "30px";
+            line.style.marginBottom = "30px";
+          });
+    
+          // Remove transition so hover animation is smooth
+          setTimeout(() => {
+            lines.forEach((line) => {
+              line.style.transition = "";
+            });
+          }, 400);
         });
       });
     }
+    
     
     const serviceDropdowns = document.querySelectorAll('.service-dropdown') as NodeListOf<HTMLElement>;
     if (serviceDropdowns) {
@@ -191,6 +208,63 @@ export default function Page() {
               <div className="row service-dropdown">
                 <div className="service-row-top">
                   <h4>Site Optimizations</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+              <h3>Accessibility</h3>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Audits</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Item # 2</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+              <h3>Development</h3>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Audits</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Item # 2</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+              <h3>Design</h3>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Audits</h4>
+                </div>
+                <div className="service-row-bottom">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                </div>
+              </div>
+              <div className="row service-dropdown">
+                <div className="service-row-top">
+                  <h4>Item # 2</h4>
                 </div>
                 <div className="service-row-bottom">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>

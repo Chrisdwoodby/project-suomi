@@ -25,7 +25,6 @@ export default function Page() {
     
         container.addEventListener("mouseenter", () => {
           const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
-    
           animating = true;
     
           const animate = () => {
@@ -46,7 +45,6 @@ export default function Page() {
     
           requestAnimationFrame(animate);
         });
-    
         container.addEventListener("mouseleave", () => {
           animating = false;
     
@@ -106,7 +104,7 @@ export default function Page() {
     return () => clearInterval(interval);
   }, []); 
     return (
-      <div>
+      <div className="main" role="main">
           <div className="services-hero">
               <div className="container fade-in-bottom">
                 <h1>Your Full Service Studio</h1>
@@ -115,87 +113,95 @@ export default function Page() {
               </div>
               <div className="searchbar fade-out">
                 <span>www.Chriswoodby.com</span>
-                <img className="pulsate-bck" src="/images/magnifier.png"/>
+                <img className="pulsate-bck" src="/images/magnifier.png" alt="search button icon"/>
               </div>
           </div>
           <div className="service-list">
             <div className="container">
               <div className="row">
-                <div className="col-md-3 service-page-title-container">
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <div className="service-page-title">
-                    <h4>SEO</h4>
-                  </div>
+                <div className="col-md-3 service-page-title-container container-border-right">
+                  <a className="link-to-details" href="#seo">
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <div className="service-page-title">
+                      <h4>SEO</h4>
+                    </div>
+                  </a>
+                </div>
+                <div className="col-md-3 service-page-title-container container-border-right">
+                  <a className="link-to-details" href="#accessibility">
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <div className="service-page-title">
+                      <h4>Accessibility</h4>
+                    </div>
+                  </a>
+                </div>
+                <div className="col-md-3 service-page-title-container container-border-right">
+                  <a className="link-to-details" href="#development">
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <div className="service-page-title">
+                      <h4>Development</h4>
+                    </div>
+                  </a>
                 </div>
                 <div className="col-md-3 service-page-title-container">
-                <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <div className="service-page-title">
-                    <h4>Accessibility</h4>
-                  </div>
-                </div>
-                <div className="col-md-3 service-page-title-container">
-                <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <div className="service-page-title">
-                    <h4>Development</h4>
-                  </div>
-                </div>
-                <div className="col-md-3 service-page-title-container">
-                <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <span className="service-page-title-bg-line"></span>
-                  <div className="service-page-title">
-                    <h4>Design</h4>
-                  </div>
+                  <a className="link-to-details" href="#design">
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <span className="service-page-title-bg-line"></span>
+                    <div className="service-page-title">
+                      <h4>Design</h4>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
           <div className="service-details">
-            <div className="container">
+            <div id="seo" className="container">
               <h3>SEO</h3>
               <div className="row service-dropdown">
                 <div className="service-row-top">
@@ -214,7 +220,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="container">
+            <div id="accessibility" className="container">
               <h3>Accessibility</h3>
               <div className="row service-dropdown">
                 <div className="service-row-top">
@@ -233,7 +239,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="container">
+            <div id="development" className="container">
               <h3>Development</h3>
               <div className="row service-dropdown">
                 <div className="service-row-top">
@@ -252,7 +258,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="container">
+            <div id="design" className="container">
               <h3>Design</h3>
               <div className="row service-dropdown">
                 <div className="service-row-top">

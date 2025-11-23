@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-<div>
+<div className="main" role="main">
         <div className="homepage">  
           <div className="home-banner">
             <div className="container">
@@ -148,7 +148,7 @@ export default function Home() {
                 </div>
                 <div className="col-md-6">
                   <div className="form-border">
-                    <ElfsightWidget widgetID="0a9cbdda-d65e-41d6-a4c4-0041247b8be2" />
+                    {/* <ElfsightWidget widgetID="0a9cbdda-d65e-41d6-a4c4-0041247b8be2" /> */}
                   </div>
                 </div>
               </div>

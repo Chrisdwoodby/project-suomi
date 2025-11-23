@@ -29,7 +29,7 @@ export default function Page() {
         });
       });
     return (
-        <div className="about-me-page">
+        <div className="about-me-page main">
             <div className="about-page-hero">
                 <div className="container">
                     <div className="row">

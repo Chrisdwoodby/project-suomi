@@ -9,24 +9,43 @@ import { useEffect } from 'react';
 
 export default function Navbar() {
   useEffect(() => {
+    const main = document.querySelector('.main') as HTMLElement | null;
+    const navBar = document.querySelector('.navigation') as HTMLElement | null;
+    if (main && navBar) {
+      const sentinel = document.createElement('main');
+    
+      sentinel.className = 'nav-sentinel';
+      navBar?.parentNode?.insertBefore(sentinel, navBar);
+    
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!navBar) return;
+    
+        if (entry.intersectionRatio === 0) {
+          navBar.classList.add('sticky-at-top');
+        } else {
+          navBar.classList.remove('sticky-at-top');
+        }
+      });
+    
+      observer.observe(sentinel);
+    }
+
+
     const offcanvas = document.getElementById("offcanvas");
     const toggleButton = document.getElementById("toggleButton");
     const closeButton = document.getElementById("closeButton");
 
     if (!offcanvas || !toggleButton || !closeButton) {
-      console.error("Required elements are missing in the DOM.");
       return;
     }
 
     // Toggle offcanvas visibility
     toggleButton.addEventListener("click", () => {
-      console.log("Opening offcanvas..."); // Debugging log
       offcanvas.classList.add("open");
     });
 
     // Close offcanvas
     closeButton.addEventListener("click", () => {
-      console.log("Closing offcanvas..."); // Debugging log
       offcanvas.classList.remove("open");
     });
 
@@ -34,18 +53,17 @@ export default function Navbar() {
     document.addEventListener("click", (event) => {
       const target = event.target;
       if (target instanceof Node && !offcanvas.contains(target) && target !== toggleButton) {
-        console.log("Closing offcanvas because clicked outside...");
         offcanvas.classList.remove("open");
       }
     });    
   }, []);
   return (
-    <div className="navigation">
+    <div role="navigation" className="navigation">
       <div className="container nav-container">
         <div className="col-md-6">
           {/* <img className="logo" src='/images/logo.png' alt="company logo"/> */}
 
-          <div className="logo-container">
+          <div className="logo-container" aria-label="company-logo">
             <div className="logo-left">
               <span className="logo-title focus-in-expand">Chris Wooodby</span>
               <span className="logo-secondary">Web Design</span>
@@ -62,7 +80,7 @@ export default function Navbar() {
           Toggle Right Offcanvas
         </button>
       </div>
-      <div id="offcanvas" className="offcanvas">
+      <div role="" id="offcanvas" className="offcanvas">
         <div className="offcanvas-header">
           <h5>Offcanvas Right</h5>
           <button id="closeButton" className="btn-close" aria-label="Close">

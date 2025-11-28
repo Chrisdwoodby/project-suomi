@@ -3,6 +3,7 @@ import Navbar from '@/app/navbar';
 import Footer from '@/app/footer';
 import 'bootstrap/dist/css/bootstrap.css';
 import './globals.css';
+import { useEffect } from 'react';
 
 export const metadata = {
   title: 'My App', // Optional, set your site title
@@ -10,6 +11,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="en">
       <head>

@@ -29,7 +29,7 @@ export default function Navbar() {
     
       observer.observe(sentinel);
     }
-
+    
 
     const offcanvas = document.getElementById("offcanvas");
     const toggleButton = document.getElementById("toggleButton");
@@ -60,6 +60,7 @@ export default function Navbar() {
   return (
     <div role="navigation" className="navigation">
       <div className="container nav-container">
+        <div className="row">
         <div className="col-md-6">
           {/* <img className="logo" src='/images/logo.png' alt="company logo"/> */}
 
@@ -75,30 +76,36 @@ export default function Navbar() {
 
         </div>
         <div className="col-md-6 nav-links">
-        <div className="mobile-nav">
-        <button id="toggleButton" className="btn">
-          Toggle Right Offcanvas
-        </button>
-      </div>
-      <div role="" id="offcanvas" className="offcanvas">
-        <div className="offcanvas-header">
-          <h5>Offcanvas Right</h5>
-          <button id="closeButton" className="btn-close" aria-label="Close">
-            ✖
-          </button>
+          <nav className="desktop-nav">
+            <Link href="/">Home</Link>
+            <Link href="/services">services</Link>
+            <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
+            <a className="company-cta">Get Started</a>
+          </nav>
+          <div className="mobile-nav">
+            <button id="toggleButton" className="btn">
+              Menu
+            </button>
+          </div>
+          <div role="" id="offcanvas" className="offcanvas">
+            <div className="offcanvas-header">
+              <h5>Offcanvas Right</h5>
+              <button id="closeButton" className="btn-close" aria-label="Close">
+                
+              </button>
+            </div>
+            <div className="offcanvas-body">
+              <nav className="mobile-nav">
+                <Link href="/">Home</Link>
+                <Link href="/services">services</Link>
+                <Link href="/about">About</Link>
+                <Link href="/contact">Contact</Link>
+                <a className="company-cta">Get Started</a>
+              </nav>
+            </div>
+          </div>
         </div>
-        <div className="offcanvas-body">
-          <p>This is the offcanvas content.</p>
-        </div>
-      </div>
-
-        <nav className="desktop-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">services</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
-          <a className="company-cta">Get Started</a>
-        </nav>
         </div>
       </div>
     </div>

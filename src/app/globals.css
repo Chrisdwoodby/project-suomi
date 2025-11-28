@@ -19,7 +19,7 @@
 html,
 body {
   max-width: 100vw;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 h1, h2, h3 {
   font-family: "Comfortaa", sans-serif;
@@ -280,9 +280,9 @@ article {
   justify-content: center;
   align-items: center;
 }
-.nav-container {
+/* .nav-container {
   display: flex;
-}
+} */
 .nav-links {
   display: flex;
   justify-content: end;
@@ -469,7 +469,7 @@ article {
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 30px;
   display: flex;
-  position: relative;
+  position: absolute;
   margin-top: -75px;
 }
 .searchbar span {
@@ -614,11 +614,111 @@ from, to { border-color: transparent; }
 .text-hidden {
   opacity: 0;
 }
-
+.gear-container {
+  /* position: absolute;
+  top: 20px;   
+  right: 20px;  */
+  margin-top: -40px;
+}
+.gear-1 {
+  height: 80px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 60px;
+  margin-right: 10%;
+  margin-top: -40px;
+}
+.gear-2 {
+  height: 80px;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  margin-right: 10%;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotating-backwards /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotating-backwards {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+.gear-1 {
+  -webkit-animation: rotating 4s linear infinite;
+  -moz-animation: rotating 4s linear infinite;
+  -ms-animation: rotating 4s linear infinite;
+  -o-animation: rotating 4s linear infinite;
+  animation: rotating 4s linear infinite;
+}
+.gear-2 {
+  -webkit-animation: rotating-backwards 4s linear infinite;
+  -moz-animation: rotating-backwards 4s linear infinite;
+  -ms-animation: rotating-backwards 4s linear infinite;
+  -o-animation: rotating-backwards 4s linear infinite;
+  animation: rotating-backwards 4s linear infinite;
+}
 .service-header {
   font-weight: 700;
   font-size: 30px;
   padding-bottom: 15px;
+}
+.col-align-center {
+  display: flex;
+  justify-content: center;
+}
+.service-hero-right-col-img {
+  height: 250px;
+  z-index: 99;
+  margin-left: -80px;
 }
 .serivces-title {
   font-size: 25px;
@@ -711,9 +811,7 @@ from, to { border-color: transparent; }
   color: #000;
 }
 .service-details .container {
-  /* border-radius: 30px; */
   margin: 50px 0;
-  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
 }
 .service-details .container h3 {
   padding: 15px 0;
@@ -729,10 +827,14 @@ from, to { border-color: transparent; }
 .service-row-bottom {
   max-height: 0;
   background: #ededed;
-  transition: max-height 300ms ease-in-out;
+  padding: 0;
+  transition: 
+    max-height 300ms ease-in-out,
+    padding 400ms ease-in-out;
 }
 .expanded .service-row-bottom {
   max-height: 500px;
+  padding: 15px;
 }
 .service-row-top {
   background: #F1F1FB;
@@ -976,14 +1078,52 @@ from, to { border-color: transparent; }
   cursor: pointer;
 }
 @media (max-width: 767px) {
+  .navigation {
+    background: unset;
+    backdrop-filter: blur(6px);
+  }
   .logo {
     width: 250px;
+  }
+  .logo-title {
+    font-size: 30px;
+  }
+  .logo-secondary {
+    font-size: 15px;
+    line-height: 15px;
+  }
+  .logo-icon {
+    height: 15px;
+    width: 15px;
+  }
+  .navigation nav {
+    flex-direction: column;
+  }
+  .mobile-nav a {
+    text-decoration: none;
+    color: #000;
+  }
+  .nav-links {
+    position: absolute;
   }
   #toggleButton {
     display: inline;
   }
   .desktop-nav {
     display: none !important;
+  }
+  .home-banner {
+    padding: 350px 0 0 0;
+    margin-top: -125px;
+    background:linear-gradient(197deg, rgba(241, 241, 251, 0.7) 9%, rgba(241, 241, 251, 1) 99%), url(/images/mobile-background.png);
+    background-size: cover;
+    background-position: center;
+  }
+  .home-banner-image {
+    display: none;
+  }
+  .partners-container {
+    padding: 70px 30px;
   }
   .services-container .row {
     margin: 0px 20px;
@@ -993,16 +1133,34 @@ from, to { border-color: transparent; }
     flex-wrap: wrap;
     padding-left: 0px !important;
     padding-right: 0px !important;
+    padding-bottom: 50px;
   }
   .mobile-service-wrap {
     background-color: #000;
     margin: 5px;
-    padding: 10px;
+    padding: 10px 15px;
     display: flex;
     border-radius: 30px;
   }
   .mobile-service-wrap h4 {
     margin-bottom: 0px !important;
+  }
+  .banner-content-row {
+    padding-bottom: 0;
+  }
+  .home-banner-lines-container {
+    padding: 0 0 10px 0;
+  }
+  .home-banner-lines {
+    margin: 4px 0;
+  }
+  .home-banner-lines {
+    background: #F1F1FB;
+  }
+  .container .row .home-banner-content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 30px;
   }
   .services-details {
     padding: 0px 0px;
@@ -1017,5 +1175,23 @@ from, to { border-color: transparent; }
   .about-content {
     padding-left: 0px;
     padding-top: 50px;
+  }
+  .fade-in-bottom .row {
+    flex-direction: column-reverse;
+  }
+  .services-hero {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+  .service-hero-right-col-img {
+    height: 150px;
+    margin-right: 50px;
+  }
+  .service-list .col-md-3 {
+    width: 50%;
+  }
+  .mobile-service-wrap {
+    background: #F1F1FB;
+    color: #000;
   }
 }

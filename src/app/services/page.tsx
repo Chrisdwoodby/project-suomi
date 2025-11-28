@@ -8,108 +8,124 @@ export default function Page() {
     function getRandomNumber(min: number, max: number) {
       return Math.random() * (max - min) + min;
     }
+  
     const titleLines = document.querySelectorAll('.service-page-title-bg-line') as NodeListOf<HTMLElement>;
     const titleLinesContainer = document.querySelectorAll('.service-page-title-container') as NodeListOf<HTMLElement>;
-    
-    if (titleLinesContainer) {
-      titleLines.forEach((item) => {
-        item.style.height = `${getRandomNumber(50, 70)}px`;
-        item.style.marginBottom = `${getRandomNumber(5, 20)}px`;
-        item.style.marginTop = `${getRandomNumber(5, 20)}px`;
-      });
-    }
-    
-    if (titleLinesContainer) {
-      titleLinesContainer.forEach((container) => {
-        let animating = false;
-    
-        container.addEventListener("mouseenter", () => {
-          const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
-          animating = true;
-    
-          const animate = () => {
-            if (!animating) return;
-    
-            const time = Date.now() / 300;
-    
-            lines.forEach((line, index) => {
-              const amplitude = 25;
-              const offset = Math.sin(time + index * 0.6) * amplitude;
-    
-              line.style.marginTop = `${30 + offset}px`;
-              line.style.marginBottom = `${30 - offset}px`;
-            });
-    
-            requestAnimationFrame(animate);
-          };
-    
-          requestAnimationFrame(animate);
-        });
-        container.addEventListener("mouseleave", () => {
-          animating = false;
-    
-          const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
-    
-          // Smooth reset
-          lines.forEach((line) => {
-            line.style.transition = "margin 0.4s ease-out";
-            line.style.marginTop = "30px";
-            line.style.marginBottom = "30px";
-          });
-    
-          // Remove transition so hover animation is smooth
-          setTimeout(() => {
-            lines.forEach((line) => {
-              line.style.transition = "";
-            });
-          }, 400);
-        });
-      });
-    }
-    
-    
-    const serviceDropdowns = document.querySelectorAll('.service-dropdown') as NodeListOf<HTMLElement>;
-    if (serviceDropdowns) {
-      serviceDropdowns.forEach((dropdown) => {
-        dropdown.addEventListener('click', () => {
-          if (dropdown.classList.contains('expanded')) {
-            dropdown.classList.remove('expanded');
-          } else {
-            dropdown.classList.add('expanded');
-          }
-        })
-      })
-    }
-
-    const heroText = document.querySelector('.hero-text-cycle') as HTMLElement | null;
-    if (!heroText) return; 
-    heroText.classList.add('text-fade'); 
-
-    const changeText = () => {
-      heroText.classList.add('text-hidden');
-
-      setTimeout(() => {
-        if (index === 3) {
-          index = 0;
-        }
-        heroText.innerHTML = serviceList[index];
-        index ++;
-        heroText.classList.remove('text-hidden'); 
-      }, 600);
-    }
-    changeText();
-
-    const interval = setInterval(changeText, 4000);
   
-    return () => clearInterval(interval);
-  }, []); 
+    titleLines.forEach((item) => {
+      item.style.height = `${getRandomNumber(50, 70)}px`;
+      item.style.marginBottom = `${getRandomNumber(5, 20)}px`;
+      item.style.marginTop = `${getRandomNumber(5, 20)}px`;
+    });
+  
+    // Store cleanup handlers
+    const cleanupFns: Array<() => void> = [];
+  
+    titleLinesContainer.forEach((container) => {
+      let animating = false;
+  
+      const mouseEnter = () => {
+        const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
+        animating = true;
+  
+        const animate = () => {
+          if (!animating) return;
+  
+          const time = Date.now() / 300;
+  
+          lines.forEach((line, index) => {
+            const amplitude = 25;
+            const offset = Math.sin(time + index * 0.6) * amplitude;
+  
+            line.style.marginTop = `${30 + offset}px`;
+            line.style.marginBottom = `${30 - offset}px`;
+          });
+  
+          requestAnimationFrame(animate);
+        };
+  
+        requestAnimationFrame(animate);
+      };
+  
+      const mouseLeave = () => {
+        animating = false;
+  
+        const lines = container.querySelectorAll<HTMLElement>('.service-page-title-bg-line');
+        lines.forEach((line) => {
+          line.style.transition = "margin 0.4s ease-out";
+          line.style.marginTop = "30px";
+          line.style.marginBottom = "30px";
+        });
+  
+        setTimeout(() => {
+          lines.forEach((line) => {
+            line.style.transition = "";
+          });
+        }, 400);
+      };
+  
+      container.addEventListener("mouseenter", mouseEnter);
+      container.addEventListener("mouseleave", mouseLeave);
+  
+      cleanupFns.push(() => {
+        container.removeEventListener("mouseenter", mouseEnter);
+        container.removeEventListener("mouseleave", mouseLeave);
+      });
+    });
+  
+    const serviceDropdowns = document.querySelectorAll('.service-dropdown') as NodeListOf<HTMLElement>;
+  
+    serviceDropdowns.forEach((dropdown) => {
+      const clickHandler = () => dropdown.classList.toggle('expanded');
+      dropdown.addEventListener("click", clickHandler);
+  
+      cleanupFns.push(() => {
+        dropdown.removeEventListener("click", clickHandler);
+      });
+    });
+  
+    const heroText = document.querySelector('.hero-text-cycle') as HTMLElement | null;
+    if (heroText) {
+      heroText.classList.add('text-fade');
+      
+      const changeText = () => {
+        heroText.classList.add('text-hidden');
+        setTimeout(() => {
+          if (index === 3) index = 0;
+          heroText.innerHTML = serviceList[index++];
+          heroText.classList.remove('text-hidden');
+        }, 600);
+      };
+  
+      changeText();
+      const interval = setInterval(changeText, 4000);
+  
+      cleanupFns.push(() => clearInterval(interval));
+    }
+  
+    // Cleanup everything on unmount / page leave
+    return () => {
+      cleanupFns.forEach(fn => fn());
+    };
+  
+  }, []);
+  
     return (
       <div className="main" role="main">
           <div className="services-hero">
               <div className="container fade-in-bottom">
-                <h1>Your Full Service Studio</h1>
-                <h3>Experts in <span className="hero-text-cycle">SEO</span></h3>
-                <a className="company-cta">Learn More</a>
+                <div className="row">
+                <div className="col-md-6">
+                  <h1>Your Full Service Studio</h1>
+                  <h3>Experts in <span className="hero-text-cycle">SEO</span></h3>
+                  <a className="company-cta">Learn More</a>
+                </div>
+                <div className="col-md-6 col-align-center gear-container">
+                  <img className="service-hero-right-col-img" src="/images/monitor.png"/>
+                  <img className="gear-1" src="/images/gear-1.png"/>
+                  <img className="gear-2" src="/images/gear-2.png"/>
+                </div>
+                </div>
               </div>
               <div className="searchbar fade-out">
                 <span>www.Chriswoodby.com</span>
@@ -202,78 +218,102 @@ export default function Page() {
           </div>
           <div className="service-details">
             <div id="seo" className="container">
-              <h3>SEO</h3>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>SEO Audits</h4>
+              <div className="row">
+                <div className="col-md-3">
+                  <h3>SEO</h3>
                 </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
-                </div>
-              </div>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Site Optimizations</h4>
-                </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
-                </div>
-              </div>
-            </div>
-            <div id="accessibility" className="container">
-              <h3>Accessibility</h3>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Audits</h4>
-                </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
-                </div>
-              </div>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Item # 2</h4>
-                </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                <div className="col-md-9">
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>SEO Audits</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>Site Optimizations</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div id="development" className="container">
-              <h3>Development</h3>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Audits</h4>
+            <div id="seo" className="container">
+              <div className="row">
+                <div className="col-md-3">
+                  <h3>Accessibility</h3>
                 </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
-                </div>
-              </div>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Item # 2</h4>
-                </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                <div className="col-md-9">
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>SEO Audits</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>Site Optimizations</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div id="design" className="container">
-              <h3>Design</h3>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Audits</h4>
+            <div id="seo" className="container">
+              <div className="row">
+                <div className="col-md-3">
+                  <h3>Development</h3>
                 </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                <div className="col-md-9">
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>SEO Audits</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>Site Optimizations</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="row service-dropdown">
-                <div className="service-row-top">
-                  <h4>Item # 2</h4>
+            </div>
+            <div id="seo" className="container">
+              <div className="row">
+                <div className="col-md-3">
+                  <h3>design</h3>
                 </div>
-                <div className="service-row-bottom">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                <div className="col-md-9">
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>SEO Audits</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
+                  <div className="service-dropdown">
+                    <div className="service-row-top">
+                      <h4>Site Optimizations</h4>
+                    </div>
+                    <div className="service-row-bottom">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem soluta quos officia accusamus nam possimus totam? Dicta non saepe consequatur asperiores voluptas delectus vitae, molestias omnis quibusdam quod id rerum?</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

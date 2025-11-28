@@ -58,8 +58,8 @@ export default function Home() {
             <div className="container">
               <div className="row banner-content-row">
                   <div className="col-md-6 home-banner-content" >
-                      <h1>Web Design that makes a <br></br><em>lasting impression</em></h1>
-                      {/* <article className="home-banner-subheader">Discover a new way forward</article> */}
+                      <h1>Web Design that makes<br></br> a <em>lasting impression</em></h1>
+                      <article className="home-banner-subheader">Discover a new and faster way forward for you online needs</article>
                       <a className="company-cta">Get Started</a>
                   </div>
                   <div className="col-md-6" >

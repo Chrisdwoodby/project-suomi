@@ -8,29 +8,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 
 export default function Navbar() {
-  useEffect(() => {
-    const main = document.querySelector('.main') as HTMLElement | null;
-    const navBar = document.querySelector('.navigation') as HTMLElement | null;
-    if (main && navBar) {
-      const sentinel = document.createElement('main');
-    
-      sentinel.className = 'nav-sentinel';
-      navBar?.parentNode?.insertBefore(sentinel, navBar);
-    
-      const observer = new IntersectionObserver(([entry]) => {
-        if (!navBar) return;
-    
-        if (entry.intersectionRatio === 0) {
-          navBar.classList.add('sticky-at-top');
-        } else {
-          navBar.classList.remove('sticky-at-top');
-        }
-      });
-    
-      observer.observe(sentinel);
+  const closeOffCanvas = function() {
+    console.log('clicked')
+    const offcanvas = document.getElementById("offcanvas");
+    const body = document.body;
+    const html = document.documentElement;
+    if (offcanvas && html && body) {
+      offcanvas.classList.remove("open");
+      html.classList.remove('offcanvas-open');
+      body.classList.remove('offcanvas-open');
     }
-    
-
+  }
+  useEffect(() => {
     const offcanvas = document.getElementById("offcanvas");
     const toggleButton = document.getElementById("toggleButton");
     const closeButton = document.getElementById("closeButton");
@@ -42,6 +31,7 @@ export default function Navbar() {
     const html = document.documentElement;
     // Toggle offcanvas visibility
     toggleButton.addEventListener("click", () => {
+      console.log('clicked');
       offcanvas.classList.add("open");
       html.classList.add('offcanvas-open');
       body.classList.add('offcanvas-open');
@@ -60,7 +50,45 @@ export default function Navbar() {
       if (target instanceof Node && !offcanvas.contains(target) && target !== toggleButton) {
         offcanvas.classList.remove("open");
       }
-    });    
+    }); 
+    const main = document.querySelector('.main') as HTMLElement | null;
+    const navBar = document.querySelector('.navigation') as HTMLElement | null;
+
+  if (main && navBar) {
+    const navHeight = navBar.offsetHeight;
+
+    const spacer = document.createElement('div');
+    spacer.style.height = `${navHeight}px`;
+    spacer.style.pointerEvents = "none";
+    spacer.style.background = "transparent";
+    spacer.className = 'nav-spacer';
+    var isMobile = Math.min(window.screen.width, window.screen.height) < 768 || navigator.userAgent.indexOf("Mobi") > -1;
+    if (isMobile) {
+      navBar.parentNode!.insertBefore(spacer, navBar.nextSibling);
+    }
+
+    if (isMobile) {
+      navBar.classList.add('sticky-at-top');
+      return;
+    }
+
+  const sentinel = document.createElement('div');
+  sentinel.className = 'nav-sentinel';
+  navBar.parentNode!.insertBefore(sentinel, navBar);
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.intersectionRatio === 0) {
+        navBar.classList.add('sticky-at-top');
+      } else {
+        navBar.classList.remove('sticky-at-top');
+      }
+    },
+    { threshold: [0, 1] }
+  );
+
+  observer.observe(sentinel);
+}   
   }, []);
   return (
     <div role="navigation" className="navigation">
@@ -102,11 +130,11 @@ export default function Navbar() {
             </div>
             <div className="offcanvas-body">
               <nav className="mobile-nav">
-                <Link href="/">Home</Link>
-                <Link href="/services">services</Link>
-                <Link href="/about">About</Link>
-                <Link href="/contact">Contact</Link>
-                <a className="company-cta">Get Started</a>
+                <Link onClick={closeOffCanvas} href="/">Home</Link>
+                <Link onClick={closeOffCanvas} href="/services">services</Link>
+                <Link onClick={closeOffCanvas} href="/about">About</Link>
+                <Link onClick={closeOffCanvas} href="/contact">Contact</Link>
+                <a onClick={closeOffCanvas} className="company-cta">Get Started</a>
               </nav>
             </div>
           </div>

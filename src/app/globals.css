@@ -48,7 +48,7 @@ article {
 }
 .navigation {
   padding: 30px 0px;
-  background: #F1F1FB;
+  background-color: #F1F1FB;
   position: sticky;
   top: 0;
   transition: 
@@ -61,9 +61,16 @@ article {
 }
 .sticky-at-top {
   padding: 10px 0;
-  background: #f1f1fb8c;
+  background-color: #f1f1fb8c;
   backdrop-filter: blur(6px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 999;
+}
+.nav-sentinel {
+  height: 1px;
 }
 .navigation nav {
   display: flex;
@@ -1090,11 +1097,25 @@ from, to { border-color: transparent; }
   }
   .navigation {
     background: unset;
+    padding: 20px;
     backdrop-filter: blur(6px);
     transition: 
     padding 200ms ease-in-out, 
     background-color 200ms ease-in-out,
     backdrop-filter 0ms ease-in-out;
+  }
+  .navigation.sticky-at-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  .sticky-at-top .logo-title {
+    font-size: 30px;
+  }
+  .sticky-at-top .logo-secondary {
+    font-size: 15px;
   }
   .logo {
     width: 250px;

@@ -56,6 +56,9 @@ article {
   background-color 200ms ease-in-out,
   backdrop-filter 200ms ease-in-out;
 }
+.offcanvas-open .navigation {
+  backdrop-filter: unset;
+}
 .sticky-at-top {
   padding: 10px 0;
   background: #f1f1fb8c;
@@ -1042,7 +1045,9 @@ from, to { border-color: transparent; }
 
 .offcanvas.open {
   right: 0;
+  width: 100%;
   visibility: inherit;
+  height: 100%;
 }
 
 .offcanvas-header {
@@ -1078,9 +1083,18 @@ from, to { border-color: transparent; }
   cursor: pointer;
 }
 @media (max-width: 767px) {
+  html.offcanvas-open, body.offcanvas-open {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+  }
   .navigation {
     background: unset;
     backdrop-filter: blur(6px);
+    transition: 
+    padding 200ms ease-in-out, 
+    background-color 200ms ease-in-out,
+    backdrop-filter 0ms ease-in-out;
   }
   .logo {
     width: 250px;

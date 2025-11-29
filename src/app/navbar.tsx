@@ -38,15 +38,20 @@ export default function Navbar() {
     if (!offcanvas || !toggleButton || !closeButton) {
       return;
     }
-
+    const body = document.body;
+    const html = document.documentElement;
     // Toggle offcanvas visibility
     toggleButton.addEventListener("click", () => {
       offcanvas.classList.add("open");
+      html.classList.add('offcanvas-open');
+      body.classList.add('offcanvas-open');
     });
 
     // Close offcanvas
     closeButton.addEventListener("click", () => {
       offcanvas.classList.remove("open");
+      html.classList.remove('offcanvas-open');
+      body.classList.remove('offcanvas-open');
     });
 
     // Optional: Close when clicking outside the offcanvas

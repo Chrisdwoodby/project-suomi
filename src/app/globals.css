@@ -1043,9 +1043,10 @@ from, to { border-color: transparent; }
   right: -100%; /* Hidden off-screen initially */
   width: 300px;
   height: 100%;
+  visibility: hidden;
   background-color: #f8f9fa;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-  transition: right 0.3s ease; /* Smooth slide-in effect */
+  transition: visability 0.3s ease; 
   overflow-y: auto;
   z-index: 1000;
 }
@@ -1090,6 +1091,12 @@ from, to { border-color: transparent; }
   cursor: pointer;
 }
 @media (max-width: 767px) {
+  .navigation .row .col-sm-9 {
+    width: 80%;
+  }
+  .navigation .row .col-sm-3 {
+    width: 20%;
+  }
   html.offcanvas-open, body.offcanvas-open {
     overflow: hidden;
     height: 100%;
@@ -1104,8 +1111,31 @@ from, to { border-color: transparent; }
     background-color 200ms ease-in-out,
     backdrop-filter 0ms ease-in-out;
   }
+  .mobile-nav-button {
+    background: #fff;
+    z-index: 999999;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobile-menu-bar {
+    display: block;
+    background: #000;
+    height: 3px;
+    width: 25px;
+    opacity: 1;
+    margin: 4px;
+    border-radius: 30px;
+    display: block;
+    -webkit-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+  }
   .navigation.sticky-at-top {
     position: fixed;
+    /* background: #F1F1FB; */
     top: 0;
     left: 0;
     width: 100%;
@@ -1116,6 +1146,10 @@ from, to { border-color: transparent; }
   }
   .sticky-at-top .logo-secondary {
     font-size: 15px;
+  }
+  .logo-container {
+    position: absolute;
+    z-index: 9999;
   }
   .logo {
     width: 250px;
@@ -1131,15 +1165,29 @@ from, to { border-color: transparent; }
     height: 15px;
     width: 15px;
   }
+  .nav-container .offcanvas-body {
+    padding-top: 150px;
+  }
   .navigation nav {
     flex-direction: column;
+  }
+  .offcanvas-open .mobile-menu-bar:nth-of-type(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .offcanvas-open .mobile-menu-bar:nth-of-type(2) {
+    opacity: 0;
+  }
+  .offcanvas-open .mobile-menu-bar:nth-of-type(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
   .mobile-nav a {
     text-decoration: none;
     color: #000;
+    margin: 10px;
   }
-  .nav-links {
-    position: absolute;
+  .mobile-nav .company-cta {
+    width: auto;
+    text-align: center;
   }
   #toggleButton {
     display: inline;

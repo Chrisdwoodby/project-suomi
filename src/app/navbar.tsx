@@ -22,27 +22,32 @@ export default function Navbar() {
   useEffect(() => {
     const offcanvas = document.getElementById("offcanvas");
     const toggleButton = document.getElementById("toggleButton");
-    const closeButton = document.getElementById("closeButton");
+    // const closeButton = document.getElementById("closeButton");
 
-    if (!offcanvas || !toggleButton || !closeButton) {
+    if (!offcanvas || !toggleButton) {
       return;
     }
     const body = document.body;
     const html = document.documentElement;
     // Toggle offcanvas visibility
     toggleButton.addEventListener("click", () => {
-      console.log('clicked');
-      offcanvas.classList.add("open");
-      html.classList.add('offcanvas-open');
-      body.classList.add('offcanvas-open');
+      if (!offcanvas.classList.contains('open')) {
+        offcanvas.classList.add("open");
+        html.classList.add('offcanvas-open');
+        body.classList.add('offcanvas-open');
+      } else {
+        offcanvas.classList.remove("open");
+        html.classList.remove('offcanvas-open');
+        body.classList.remove('offcanvas-open');
+      }
     });
 
     // Close offcanvas
-    closeButton.addEventListener("click", () => {
-      offcanvas.classList.remove("open");
-      html.classList.remove('offcanvas-open');
-      body.classList.remove('offcanvas-open');
-    });
+    // closeButton.addEventListener("click", () => {
+    //   offcanvas.classList.remove("open");
+    //   html.classList.remove('offcanvas-open');
+    //   body.classList.remove('offcanvas-open');
+    // });
 
     // Optional: Close when clicking outside the offcanvas
     document.addEventListener("click", (event) => {
@@ -94,7 +99,7 @@ export default function Navbar() {
     <div role="navigation" className="navigation">
       <div className="container nav-container">
         <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 col-sm-9">
           {/* <img className="logo" src='/images/logo.png' alt="company logo"/> */}
 
           <div className="logo-container" aria-label="company-logo">
@@ -108,7 +113,7 @@ export default function Navbar() {
           </div>
 
         </div>
-        <div className="col-md-6 nav-links">
+        <div className="col-md-6 col-sm-3 nav-links">
           <nav className="desktop-nav">
             <Link href="/">Home</Link>
             <Link href="/services">services</Link>
@@ -116,18 +121,20 @@ export default function Navbar() {
             <Link href="/contact">Contact</Link>
             <a className="company-cta">Get Started</a>
           </nav>
-          <div className="mobile-nav">
+          <div className="mobile-nav-button">
             <button id="toggleButton" className="btn">
-              Menu
+              <span className="mobile-menu-bar"></span>
+              <span className="mobile-menu-bar"></span>
+              <span className="mobile-menu-bar"></span>
             </button>
           </div>
           <div role="" id="offcanvas" className="offcanvas">
-            <div className="offcanvas-header">
+            {/* <div className="offcanvas-header">
               <h5>Offcanvas Right</h5>
               <button id="closeButton" className="btn-close" aria-label="Close">
                 
               </button>
-            </div>
+            </div> */}
             <div className="offcanvas-body">
               <nav className="mobile-nav">
                 <Link onClick={closeOffCanvas} href="/">Home</Link>

@@ -1,9 +1,7 @@
 "use client";
 
-// components/Navbar.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-// import logo from './Media/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 
@@ -22,14 +20,12 @@ export default function Navbar() {
   useEffect(() => {
     const offcanvas = document.getElementById("offcanvas");
     const toggleButton = document.getElementById("toggleButton");
-    // const closeButton = document.getElementById("closeButton");
 
     if (!offcanvas || !toggleButton) {
       return;
     }
     const body = document.body;
     const html = document.documentElement;
-    // Toggle offcanvas visibility
     toggleButton.addEventListener("click", () => {
       if (!offcanvas.classList.contains('open')) {
         offcanvas.classList.add("open");
@@ -42,14 +38,6 @@ export default function Navbar() {
       }
     });
 
-    // Close offcanvas
-    // closeButton.addEventListener("click", () => {
-    //   offcanvas.classList.remove("open");
-    //   html.classList.remove('offcanvas-open');
-    //   body.classList.remove('offcanvas-open');
-    // });
-
-    // Optional: Close when clicking outside the offcanvas
     document.addEventListener("click", (event) => {
       const target = event.target;
       if (target instanceof Node && !offcanvas.contains(target) && target !== toggleButton) {
@@ -62,41 +50,24 @@ export default function Navbar() {
   if (main && navBar) {
     const navHeight = navBar.offsetHeight;
 
-    const spacer = document.createElement('div');
-    spacer.style.height = `${navHeight}px`;
-    spacer.style.pointerEvents = "none";
-    spacer.style.background = "transparent";
-    spacer.className = 'nav-spacer';
     var isMobile = Math.min(window.screen.width, window.screen.height) < 768 || navigator.userAgent.indexOf("Mobi") > -1;
-    if (isMobile) {
-      navBar.parentNode!.insertBefore(spacer, navBar.nextSibling);
-    }
 
     if (isMobile) {
       navBar.classList.add('sticky-at-top');
       return;
     }
-
-  const sentinel = document.createElement('div');
-  sentinel.className = 'nav-sentinel';
-  navBar.parentNode!.insertBefore(sentinel, navBar);
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.intersectionRatio === 0) {
-        navBar.classList.add('sticky-at-top');
-      } else {
+    window.addEventListener("scroll", function(){
+      if(window.scrollY==0){
         navBar.classList.remove('sticky-at-top');
+      } else {
+        navBar.classList.add('sticky-at-top');
       }
-    },
-    { threshold: [0, 1] }
-  );
-
-  observer.observe(sentinel);
+    });
 }   
   }, []);
   return (
     <div role="navigation" className="navigation">
+      <div className="nav-inner">
       <div className="container nav-container">
         <div className="row">
         <div className="col-md-6 col-sm-9">
@@ -147,6 +118,7 @@ export default function Navbar() {
           </div>
         </div>
         </div>
+      </div>
       </div>
     </div>
   );

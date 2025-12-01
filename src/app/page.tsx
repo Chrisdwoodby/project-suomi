@@ -54,7 +54,7 @@ export default function Home() {
   return (
 <div className="main" role="main">
         <div className="homepage">  
-          <div className="home-banner">
+          <div className="home-banner hero">
             <div className="container">
               <div className="row banner-content-row">
                   <div className="col-md-6 home-banner-content" >

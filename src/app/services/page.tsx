@@ -112,7 +112,7 @@ export default function Page() {
   
     return (
       <div className="main" role="main">
-          <div className="services-hero">
+          <div className="services-hero hero">
               <div className="container fade-in-bottom">
                 <div className="row">
                 <div className="col-md-6">

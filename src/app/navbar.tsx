@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 
 export default function Navbar() {
   const closeOffCanvas = function() {
-    console.log('clicked')
     const offcanvas = document.getElementById("offcanvas");
     const body = document.body;
     const html = document.documentElement;
@@ -26,7 +25,8 @@ export default function Navbar() {
     }
     const body = document.body;
     const html = document.documentElement;
-    toggleButton.addEventListener("click", () => {
+    toggleButton.addEventListener("click", (e) => {
+      e.stopPropagation();
       if (!offcanvas.classList.contains('open')) {
         offcanvas.classList.add("open");
         html.classList.add('offcanvas-open');
@@ -55,14 +55,15 @@ export default function Navbar() {
     if (isMobile) {
       navBar.classList.add('sticky-at-top');
       return;
+    } else {
+      window.addEventListener("scroll", function(){
+        if(window.scrollY==0){
+          navBar.classList.remove('sticky-at-top');
+        } else {
+          navBar.classList.add('sticky-at-top');
+        }
+      });
     }
-    window.addEventListener("scroll", function(){
-      if(window.scrollY==0){
-        navBar.classList.remove('sticky-at-top');
-      } else {
-        navBar.classList.add('sticky-at-top');
-      }
-    });
 }   
   }, []);
   return (

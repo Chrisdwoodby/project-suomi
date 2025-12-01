@@ -68,11 +68,11 @@ export default function Home() {
               </div>
             </div>
             <div className="home-banner-lines-container">
-              <span className="home-banner-lines line-1 slide-in-right-line-1"></span>
+              {/* <span className="home-banner-lines line-1 slide-in-right-line-1"></span>
               <span className="home-banner-lines line-2 slide-in-right-line-2"></span>
               <span className="home-banner-lines line-3 slide-in-right-line-1"></span>
               <span className="home-banner-lines line-4 slide-in-right-line-1"></span>
-              <span className="home-banner-lines line-5 slide-in-right-line-2"></span>
+              <span className="home-banner-lines line-5 slide-in-right-line-2"></span> */}
             </div>
           </div>
           <div className="web-section partners-container">

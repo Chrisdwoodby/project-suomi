@@ -25,6 +25,12 @@ h1, h2, h3 {
   font-family: "Comfortaa", sans-serif;
   font-weight: 700;
 }
+#offcanvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+}
 body {
   color: var(--foreground);
   background: var(--background);
@@ -48,11 +54,11 @@ article {
 }
 .navigation {
   padding: 30px 0px;
-  background-color: #F1F1FB;
+  /* background-color: #F1F1FB; */
   position: sticky;
-  /* background-color: #f1f1fb8c; */
   backdrop-filter: blur(6px);
   top: 0;
+  z-index: 999;
   width: 100%;
   transition: 
   padding 200ms ease-in-out, 
@@ -266,7 +272,24 @@ article {
   border-radius: 50%;
   margin: -10px 0px 0px 12px;
 }
-
+.home-banner {
+  padding: 350px 0 0 0;
+  position: relative;
+  margin-top: -125px;
+  background:linear-gradient(90deg, rgba(241, 241, 251, 1) 9%, rgba(241, 241, 251, .7) 99%), url(/images/home-hero-bg.png);
+  background-size: contain;
+  background-position: center;
+  margin-top: -150px;
+}
+.home-banner:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 90px;    
+  bottom: 0;
+  background-image: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+}
 .home-banner-content {
   display: flex;
   flex-direction: column;
@@ -332,7 +355,7 @@ article {
   padding-bottom: 50px;
 }
 .home-banner {
-  background: #F1F1FB;
+  /* background: #F1F1FB; */
   padding: 120px 0px 60px 0px;
 }
 .home-banner-subheader {
@@ -1138,12 +1161,12 @@ from, to { border-color: transparent; }
             transition: all .25s ease-in-out;
   }
   .navigation.sticky-at-top {
-    position: fixed;
-    /* background: #F1F1FB; */
+    /* position: fixed;
+    background: #F1F1FB;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 999; */
   }
   .sticky-at-top .logo-title {
     font-size: 30px;

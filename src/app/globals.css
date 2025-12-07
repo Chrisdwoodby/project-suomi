@@ -1280,6 +1280,27 @@ from, to { border-color: transparent; }
   .form-text-border {
     margin: unset;
   }
+  .form-item-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+  .form-item-row input, .form-item-row textarea {
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  .form-border {
+    border-radius: 30px;
+    padding: 20px;
+    outline: 20px solid #F1F1FB;
+    background: #fff;
+  }
+  .form-text-border {
+    border-radius: 30px;
+    padding: 50px;
+    outline: 20px solid #0A21BF;
+    margin: 50px -50px 0px 0px;
+  }
   .contact-form, .about-me-home {
     margin: 0px 20px;
   }

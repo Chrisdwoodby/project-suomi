@@ -1,6 +1,7 @@
 // import Image from "next/image";
 "use client"; 
 import Navbar from '@/app/navbar';
+import ContactForm from './contact/page';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import Image from 'next/image';
@@ -148,7 +149,7 @@ export default function Home() {
                 </div>
                 <div className="col-md-6">
                   <div className="form-border">
-                    {/* <ElfsightWidget widgetID="0a9cbdda-d65e-41d6-a4c4-0041247b8be2" /> */}
+                    <ContactForm/>
                   </div>
                 </div>
               </div>
